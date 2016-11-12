@@ -1,0 +1,24 @@
+allprojects {
+    apply plugin: 'java'
+    group = 'de.crestfallen'
+    version = '0.1.0'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+dependencies {
+    compile project(':common')
+    compile 'org.slf4j:slf4j-api:1.7.12'
+    testCompile 'junit:junit:4.12'
+}
+
+jar {
+    manifest.attributes 'Main-Class': 'de.crestfallen.Main'
+    from {
+        configurations.compile.collect { zipTree it }
+    }
+}
