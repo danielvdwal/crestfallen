@@ -1,6 +1,7 @@
 package de.crestfallen.common.processor.composite;
 
 import de.crestfallen.common.component.RgbLed;
+import de.crestfallen.common.component.composite.RgbLedMatrix;
 import de.crestfallen.common.component.state.RgbLedState;
 
 /**
@@ -40,5 +41,17 @@ public class RgbLedMatrixProcessor {
             }
         }
         return RgbLedState.OFF;
+    }
+
+    RgbLed[][] copy(RgbLedMatrix matrix) {
+        RgbLed[][] copiedMatrix = new RgbLed[matrix.getNrOfRows()][matrix.getNrOfCols()];
+        for (int x = 0; x < matrix.getNrOfRows(); x++) {
+            for (int y = 0; y < matrix.getNrOfCols(); y++) {
+                RgbLed rgbLed = new RgbLed();
+                rgbLed.setState(matrix.getRgbLedAt(x, y).getState());
+                copiedMatrix[x][y] = rgbLed;
+            }
+        }
+        return copiedMatrix;
     }
 }
